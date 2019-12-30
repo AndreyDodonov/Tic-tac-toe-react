@@ -5,7 +5,6 @@ const config = require('config');
 const morgan = require('morgan');
 
 
-
 // mongoose & server start
 const dbhost = config.get('DBHost');
 const PORT = config.get('port') || 5000;
@@ -32,12 +31,11 @@ start().then(() => console.log(`server has been started on port ${PORT}` ));
 // express middlewares
 const app = express();
 
-// app.use(require('morgan')('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
 if(config.util.getEnv('NODE_ENV') !== 'test') {
-    app.use(morgan('combined'));
+    app.use(morgan('dev'));
 }
 
 // routes

@@ -3,29 +3,48 @@ const User = require('../Models/User');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const config = require('config');
-const {check, validationResult} = require('express-validator');
+const {validationResult, check} = require('express-validator');
+
+
+module.exports.validate = (method) => {
+    if (method === 'register') {
+        {
+            return [
+                check('email', 'incorrect e-mail').isEmail(),
+                check('password', 'incorrect password').isLength({min: 6})
+            ]
+        }
+    }
+
+    if (method === 'login') {
+        return [
+            check('email', 'incorrect e-mail').normalizeEmail().isEmail(),
+            check('password', 'incorrect password').exists()
+        ]
+    }
+};
 
 module.exports.register = async (req, res) => {
     try {
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
-            res.status(400). json({errors: errors.array(), message: 'incorrect registration data'})
+            return res.status(400).json({errors: errors.array(), message: 'incorrect registration data'});
         }
 
         const {email, password} = req.body;
-        const candidate = await User.findOne({email:email});
+        const candidate = await User.findOne({email: email});
         if (candidate) {
-            return res.status(400).json({message: 'email is busy ((. Try another'})
+            return res.status(400).json({message: 'email already in use ((. Try another'})
         }
 
         const hashedPassword = await bcrypt.hash(password, 12);
-        const user = new User ({email, password: hashedPassword});
+        const user = new User({email, password: hashedPassword});
 
         await user.save();
         res.status(201).json({message: 'user was created '});
 
-    } catch(e) {
-        errorHandler(res, e)
+    } catch (e) {
+        errorHandler(res, e);
     }
 };
 
@@ -33,7 +52,7 @@ module.exports.login = async (req, res) => {
     try {
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
-            res.status(400). json({errors: errors.array(), message: 'incorrect login data'})
+            return res.status(400).json({errors: errors.array(), message: 'incorrect login data'})
         }
 
         const {email, password} = req.body;
@@ -56,7 +75,7 @@ module.exports.login = async (req, res) => {
 
         await res.json({token, userId: user.id})
 
-    } catch(e) {
+    } catch (e) {
         errorHandler(res, e)
     }
 };
