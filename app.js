@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const config = require('config');
 const morgan = require('morgan');
+const path = require('path');
 
 
 // mongoose & server start
@@ -42,5 +43,13 @@ if(config.util.getEnv('NODE_ENV') !== 'test') {
 
 app.use('/api/auth', require('./routes/auth.routes'));
 app.use('/api/stats', require('./routes/stats.routes'));
+
+if (process.env.NODE_ENV === 'production') {
+    app.use('/', express.static(path.join(__dirname, 'client', 'build')));
+
+    app.get('*', (req, res) => {
+        res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'))
+    })
+}
 
 module.exports = app;
