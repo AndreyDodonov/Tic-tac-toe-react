@@ -4,9 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-
+    "start": "cross-env NODE_ENV=production node app.js",
     "devServ": "nodemon app.js",
     "client": "npm run start --prefix client",
+    "heroku-postbuild": "cd client && npm install && npm run build",
     "dev": "concurrently \"npm run devServ\" \"npm run client\""
   },
   "keywords": [],
