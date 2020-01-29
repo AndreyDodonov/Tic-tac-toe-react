@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/AndreyDodonov/Tic-tac-toe-react.svg?branch=master)](https://travis-ci.org/AndreyDodonov/Tic-tac-toe-react)
+
 ## Крестики-нолики 🕹
 
 #### Тестовое задание ❌ ⭕
