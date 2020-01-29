@@ -7,6 +7,11 @@ import StartGame from './StartGame.js';
 import PlayersList from './PlayersList.js';
 import './game.css';
 
+/**
+ * @author Andrey Dodonov
+ * @description игра крестики-нолики (5 в ряд) с изменяемым размером поля
+ */
+
 class Game extends Component {
     constructor(props) {
         super(props);
@@ -36,11 +41,11 @@ class Game extends Component {
             })({})
         });
     }
-
+    // очерёдность хода
     changePlayer = () => {
         this.setState(prevState => ({next: (prevState.next + 1) % prevState.order.length}))
     };
-
+    // стартовое сообщение
     raiseAlert = () => this.setState({alert: true});
 
     // проверяем на выигравшего
@@ -71,7 +76,7 @@ class Game extends Component {
             window.M.toast({html: 'game over'})
         }
     };
-
+    // обнуляем победителя, очерёдность хода, убираем стартовое сообщение
     play = () => {
         this.setState({winner: "", update: true, next: 0, alert: false, before: false});
     };
@@ -126,8 +131,9 @@ class Game extends Component {
 
                 <div className="main">
                     <div className="bar">
-                        <div onClick={() => this.toggleVisibility(this.refs.optionsOuter)}
-                             className="menu">MENU
+                        <div className="menu"
+                             onClick={() => this.toggleVisibility(this.refs.optionsOuter)}
+                             >MENU
                         </div>
                         <div className="options " ref="optionsOuter">
                             <div ref="playButton" className="play underline"
@@ -139,11 +145,17 @@ class Game extends Component {
                             >INFO
                             </div>
                             <div className="optionsContainer hidden" ref="infoContainer">
-                                <div className="infoOuter">ИГРОКИ: <PlayersList order={this.state.order}
-                                                                                next={this.state.next}/></div>
+                                <div className="infoOuter"
+                                >ИГРОКИ: <PlayersList order={this.state.order}
+                                         next={this.state.next}
+                                />
+                                </div>
                                 <div className="outerScore">
                                     <div className="infoOuter">СЧЁТ:</div>
-                                    <Score className="infoInner" players={this.state.order} score={this.state.score}/>
+                                    <Score className="infoInner"
+                                           players={this.state.order}
+                                           score={this.state.score}
+                                    />
                                 </div>
                             </div>
                             <div onClick={() => this.toggleVisibility(this.refs.optionsInner)}
@@ -154,20 +166,34 @@ class Game extends Component {
                                     <div className="label1">КОЛ-ВО ИГРОКОВ<br/>
                                         (от 2 до 5 игроков)
                                     </div>
-                                    <div className="input"><input type="number" ref="players"
-                                                                  placeholder={this.state.numOfPlayers}
-                                                                  min="2" max="5"/></div>
+                                    <div className="input">
+                                        <input type="number"
+                                               ref="players"
+                                               placeholder={this.state.numOfPlayers}
+                                               min="2" max="5"
+                                        />
+                                    </div>
                                 </div>
                                 <div className="wrapper2">
-                                    <div className="label2">РАЗМЕР ПОЛЯ<br/>(от 5 до 20 клеток на сторону)</div>
-                                    <div className="input"><input type="number" className="input2" min="5" max="20"
-                                                                  ref="size" placeholder={this.state.size}/></div>
+                                    <div className="label2"
+                                    >РАЗМЕР ПОЛЯ<br/>(от 5 до 20 клеток на сторону)
+                                    </div>
+                                    <div className="input">
+                                        <input type="number"
+                                               className="input2"
+                                               min="5" max="20"
+                                               ref="size" placeholder={this.state.size}
+                                        />
+                                    </div>
                                 </div>
                                 <div className="wrapper3">
                                     <div className="label3">Очистить счёт</div>
                                     <div className="input"><input type="checkbox" id="resetScore"/></div>
                                 </div>
-                                <div id="resetButton" className="label3 underline" onClick={this.reset}>Принять
+                                <div id="resetButton"
+                                     className="label3 underline"
+                                     onClick={this.reset}
+                                >Принять
                                 </div>
                             </div>
                         </div>
@@ -192,70 +218,3 @@ class Game extends Component {
 
 export default Game;
 
-
-// render() {
-//     return (
-//         <div className="wrapper">
-//             <div className="winner-alert-wrapper">
-//                 <StartGame alert={this.state.alert}/>
-//             </div>
-//
-//             <div className="main">
-//                 <div className="bar">
-//                     <div onClick={() => this.toggleVisibility(this.refs.optionsOuter)}
-//                          className="menu">&#9776;</div>
-//                     <div className="options hidden" ref="optionsOuter">
-//                         <div ref="playButton" className="play underline" onClick={this.play}>PLAY</div>
-//                         <div ref="infoButton" className="info underline" onClick={
-//                             () => this.toggleVisibility(this.refs.infoContainer)}>INFO
-//                         </div>
-//                         <div className="optionsContainer hidden" ref="infoContainer">
-//                             <div className="infoOuter">ИГРОКИ: <PlayersList order={this.state.order}
-//                                                                             next={this.state.next}/></div>
-//                             <div className="outerScore">
-//                                 <div className="infoOuter">СЧЁТ:</div>
-//                                 <Score className="infoInner" players={this.state.order} score={this.state.score}/>
-//                             </div>
-//                         </div>
-//                         <div onClick={() => this.toggleVisibility(this.refs.optionsInner)}
-//                              className="reset underline">НАСТРОЙКИ
-//                         </div>
-//                         <div className="optionsContainer hidden" ref="optionsInner">
-//                             <div className="wrapper1">
-//                                 <div className="label1">КОЛ-ВО ИГРОКОВ<br/>
-//                                     (от 2 до 5 игроков)
-//                                 </div>
-//                                 <div className="input"><input type="number" ref="players"
-//                                                               placeholder={this.state.numOfPlayers}
-//                                                               min="2" max="5"/></div>
-//                             </div>
-//                             <div className="wrapper2">
-//                                 <div className="label2">РАЗМЕР ПОЛЯ<br/>(от 5 до 20 клеток на сторону)</div>
-//                                 <div className="input"><input type="number" className="input2" min="5" max="20"
-//                                                               ref="size" placeholder={this.state.size}/></div>
-//                             </div>
-//                             <div className="wrapper3">
-//                                 <div className="label3">Очистить счёт</div>
-//                                 <div className="input"><input type="checkbox" id="resetScore"/></div>
-//                             </div>
-//                             <div id="resetButton" className="label3 underline" onClick={this.reset}>Принять
-//                             </div>
-//                         </div>
-//                     </div>
-//                 </div>
-//                 <div className="grid">
-//                     <Grid
-//                         nextMove={this.state.order[this.state.next]} onClick={this.changePlayer}
-//                         check={this.checkWinner} winner={this.state.winner}
-//                         size={this.state.size}
-//                         update={this.state.update} updateToFalse={this.updateToFalse}
-//                         before={this.state.before}
-//                         alert={() => this.raiseAlert()}/>
-//                 </div>
-//             </div>
-//             <div className="winner-alert-wrapper">
-//                 <WinnerAlert winner={this.state.winner}/>
-//             </div>
-//         </div>
-//     )
-// }
