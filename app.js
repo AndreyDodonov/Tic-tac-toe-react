@@ -8,7 +8,7 @@ const path = require('path');
 
 // mongoose & server start
 const dbhost = config.get('DBHost');
-const PORT = config.get('port') || 5000;
+const PORT = process.env.PORT || 5000;  // поменять config.get('port')
 async function start() {
     try {
         await mongoose.connect(dbhost, {
