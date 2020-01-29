@@ -16,6 +16,11 @@ export const AuthPage = () => {
         clearError();
     }, [error, message, clearError]);
 
+    // исправление label. См. https://materializecss.com/text-inputs.html
+    useEffect(()=>{
+        window.M.updateTextFields();
+    }, []);
+
 
     const changeHandler = event => {
         setForm({...form, [event.target.name ]: event.target.value});
@@ -38,7 +43,7 @@ export const AuthPage = () => {
     return (
         <div className="row">
             <div className="col s6 offset-s3">
-                <h1>SHORTEN LINK</h1>
+                <h1>Tic Tac Toe</h1>
                 <div className="card blue darken-1">
                     <div className="card-content white-text">
                         <span className="card-title">Authorization</span>

@@ -40,8 +40,7 @@ if(config.util.getEnv('NODE_ENV') !== 'test') {
 
 // routes
 
- app.use('/api/auth', require('./routes/auth.routes'));
-
-
+app.use('/api/auth', require('./routes/auth.routes'));
+app.use('/api/stats', require('./routes/stats.routes'));
 
 module.exports = app;

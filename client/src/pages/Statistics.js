@@ -1,9 +1,9 @@
 import React from "react";
 
-export const LinksPage = () => {
+export const Statistics = () => {
   return (
       <div>
-          <h1>LinksPage</h1>
+          <h1>Statistics</h1>
       </div>
   )
 };

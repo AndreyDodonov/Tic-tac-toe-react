@@ -1,7 +1,6 @@
 import React from "react";
-import {LinksPage} from "./pages/LinksPage";
-import {CreatePage} from "./pages/CreatePage";
-import {DetailPage} from "./pages/DetailPage";
+import {Statistics} from "./pages/Statistics";
+import Game from "./pages/Game/Game";
 import {AuthPage} from "./pages/AuthPage";
 import {Switch} from "react-router-dom";
 import {Route} from "react-router-dom";
@@ -13,24 +12,21 @@ export const useRoutes = isAuthenticated => {
         return (
             <Switch>
                 <Route path="/links" exact>
-                    <LinksPage/>
+                    <Statistics/>
                 </Route>
-                <Route path="/create" exact>
-                    <CreatePage/>
+                <Route path="/game" exact>
+                    <Game/>
                 </Route>
-                <Route path="/detail/:id">
-                    <DetailPage/>
-                </Route>
-                <Redirect to="/create" />
+                <Redirect to="/game"/>
             </Switch>
         )
     }
     return (
         <Switch>
             <Route path="/" exact>
-               <AuthPage />
+                <AuthPage/>
             </Route>
-            <Redirect to="/" />
+            <Redirect to="/"/>
         </Switch>
     )
 };

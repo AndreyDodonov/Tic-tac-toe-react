@@ -1,0 +1,170 @@
+.canvas {
+  border: 2px solid black;
+}
+
+.wrapper, html, body {
+  height: 100%;
+  margin: 0;
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.main {
+  display: flex;
+  flex: 2;
+  margin-top: 30px;
+}
+
+.header {
+  padding: 40px;
+  display: flex;
+  justify-content: center;
+  font-size: 40px;
+  font-weight: bold;
+}
+
+.menu {
+  font-size: 32px;
+}
+
+.menu:hover {
+  cursor: pointer;
+  color: red;
+}
+
+.outerMenu {
+  display: flex;
+
+}
+
+.bar {
+  display: flex;
+  width: 30%;
+  align-items: center;
+  flex-direction: column;
+  font-size: 30px;
+}
+
+.grid {
+  flex: 1 1;
+  margin-top: 20px;
+}
+
+.options {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  flex-grow: 1;
+  align-self: stretch;
+}
+
+.optionsContainer {
+  font-size: 15px;
+  display: flex;
+  flex-direction: column;
+  width: 60%;
+  align-self: flex-end;
+  flex-grow: 2;
+  justify-content: space-around;
+}
+
+.grid {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.innerWrapper {
+  margin: 20px;
+}
+
+.play, .info, .reset {
+  display: flex;
+  justify-content: center;
+}
+
+.wrapper1, .wrapper2, .wrapper3 {
+  display: flex;
+  justify-content: space-between;
+}
+
+.innerScore {
+  display: flex;
+}
+
+.score {
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+  align-self: flex-end;
+}
+
+.outerScore {
+  display: flex;
+}
+
+.label2 {
+  display: flex;
+  flex-grow: 2;
+  width: 80%;
+}
+
+.input {
+  display: flex;
+  flex-grow: 0;
+  align-self: baseline;
+}
+
+.info {
+  margin-bottom: 15px;
+  margin-top: 10px;
+}
+
+.play {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.reset {
+  margin-bottom: 15px;
+}
+
+.hidden {
+  display: none;
+}
+
+.underline:hover {
+  cursor: pointer;
+  text-decoration: underline;
+  text-decoration-color: red;
+}
+
+.input:hover {
+  border: 1px solid red;
+}
+
+#resetButton {
+  font-size: 1.1em;
+  margin-left: -20px;
+  margin-top: 20px;
+}
+
+.banner {
+  color: red;
+  display: flex;
+  justify-content: center;
+  border-top: 2px solid red;
+  border-bottom: 2px solid red;
+  margin-top: -20px;
+}
+
+.red {
+  color: red;
+}
+
+.winner-alert-wrapper {
+  margin-top: 20px;
+}
